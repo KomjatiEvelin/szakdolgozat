@@ -1,5 +1,4 @@
 import React from "react";
-import {Button, Form} from "react-bootstrap";
 
 class LoginPage extends React.Component {
 
@@ -20,40 +19,29 @@ class LoginPage extends React.Component {
     render() {
         return (
             <body  className="App-body">
-            <div className={"loginForm"}>
-                <Form>
+            <div className="card">
+                <div className="card-body">
+                    <h4 className="card-title">Bejelentkezés</h4>
+                    <div className="card-text">
+                        <form>
+                            <div className="mb-3">
+                                <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                                <input type="email" className="form-control" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp"/>
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                                <input type="password" className="form-control" id="exampleInputPassword1"/>
+                            </div>
+                            <div className="mb-3 form-check">
+                                <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
+                                    <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+                            </div>
+                            <button type="submit" className="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
 
-                    <Form.Row>
-                        <Form.Group controlId={"formGridLoginEmail"}>
-                            <Form.Label> Email </Form.Label>
-                            <Form.Control required autoComplete="off"
-                                          name="email"
-                                          type="email"
-                                          value={this.state.email}
-                                          onChange={this.formOnChange}
-                                          placeholder="Please enter your email address:"/>
-                        </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Group  controlId={"formGridLoginPasswd"}>
-                            <Form.Label> Password </Form.Label>
-                            <Form.Control required autoComplete="off"
-                                          name="passwd"
-                                          type="password"
-                                          value={this.state.passwd}
-                                          onChange={this.formOnChange}
-                                          pattern="[A-Z a-z 0-9]*"
-                                          placeholder="Please enter your password:"/>
-                        </Form.Group>
-                    </Form.Row>
-                    <Button
-                        disabled={this.state.email.length === 0 ||  this.state.passwd === 0}
-                        size={"sm"} variant="success" type="submit" >
-                        Submit
-                    </Button>
-
-
-                </Form>
+                </div>
             </div>
             </body>);
     }
