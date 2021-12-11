@@ -1,7 +1,7 @@
 import React from "react";
 import { Card ,Button} from 'react-bootstrap';
-import background from "../../assets/reg_backgr.jpg";
-import {Redirect} from "react-router-dom";
+
+import AuthService from "../../service/auth_service";
 
 class RegPage extends React.Component {
 
@@ -10,9 +10,10 @@ class RegPage extends React.Component {
         this.state = {
             email: "",
             userName: "",
-            passwd: "",
+            password: "",
             class:"",
-            redirect:false
+            successful: false,
+            message: ""
         };
         this.handleSubmit=this.handleSubmit.bind(this);
         this.formOnChange=this.formOnChange.bind(this);
@@ -22,27 +23,36 @@ class RegPage extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const self=this;
-        var data = {
-            userName: this.state.userName,
-            email: this.state.email,
-            passwd: this.state.passwd,
-            class:this.state.class
-        }
-
-        fetch("http://localhost:9000/users/register", {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
-        }).then(function(response) {
-            if (response.status >= 400) {
-                throw new Error("Bad response from server");
-            }
-            self.setState({redirect: true});
-
-        }).catch(function(err) {
-            console.log(err)
+        this.setState({
+            message: "",
+            successful: false
         });
+        AuthService.register(
+            this.state.userName,
+            this.state.class,
+            this.state.email,
+            this.state.password
+        ).then(
+            response => {
+                this.setState({
+                    message: response.data.message,
+                    successful: true
+                });
+            },
+            error => {
+                const resMessage =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+
+                this.setState({
+                    successful: false,
+                    message: resMessage
+                });
+            }
+        );
     }
 
     formOnChange(event){
@@ -51,12 +61,8 @@ class RegPage extends React.Component {
     }
 
     render() {
-        if(this.state.redirect){
 
-            return(<Redirect to={"/login"}/>);
-        }
         return (
-            <body style={{backgroundImage:`url(${background})`, backgroundSize:"cover", color:"white"}}>
             <Card style={{ width: '25rem', margin:"auto",marginTop:"10rem", backgroundColor:'rgba(99, 156, 156, 0.65)'}}>
                 <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)'}}>Regisztráció</Card.Header>
                 <Card.Body>
@@ -72,11 +78,11 @@ class RegPage extends React.Component {
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleInputPassword1" className="form-label">Jelszó</label>
-                                <input onChange={this.formOnChange} type="password" className="form-control" name="passwd"/>
+                                <input onChange={this.formOnChange} type="password" className="form-control" name="password"/>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleInputPassword2" className="form-label">Jelszó ismét</label>
-                                <input type="password" className="form-control" name="exampleInputPassword2"/>
+                                <input type="password" className="form-control" name="password2"/>
                             </div>
                             <div className="mb-3">
                                 <label className="form-label" htmlFor="exampleClassk1">Évfolyam</label>
@@ -87,8 +93,7 @@ class RegPage extends React.Component {
                     </Card.Text>
 
                 </Card.Body>
-            </Card>
-            </body>);
+            </Card>);
     }
 }
 export default RegPage

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 
 import UserService from "../../service/user_service";
-import {Card} from "react-bootstrap";
 
-export default class Home extends Component {
+export default class BoardUser extends Component {
     constructor(props) {
         super(props);
 
@@ -13,7 +12,7 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-        UserService.getPublicContent().then(
+        UserService.getUserBoard().then(
             response => {
                 this.setState({
                     content: response.data
@@ -22,7 +21,9 @@ export default class Home extends Component {
             error => {
                 this.setState({
                     content:
-                        (error.response && error.response.data) ||
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
                         error.message ||
                         error.toString()
                 });
@@ -32,14 +33,11 @@ export default class Home extends Component {
 
     render() {
         return (
-            <Card style={{ width: '25rem', margin:"auto",marginTop:"10rem", backgroundColor:'rgba(99, 156, 156, 0.65)'}}>
-                <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)'}}>Üdvözlöm!</Card.Header>
-                <Card.Body>
-                    <Card.Text>
+            <div className="container">
+                <header className="jumbotron">
                     <h3>{this.state.content}</h3>
-                    </Card.Text>
-                </Card.Body>
-            </Card>
+                </header>
+            </div>
         );
     }
 }
