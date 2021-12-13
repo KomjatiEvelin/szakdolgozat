@@ -3,7 +3,6 @@ const config = require("../config/auth_config");
 const User = db.user;
 const Password = db.password;
 
-const Op = db.Sequelize.Op;
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -15,14 +14,20 @@ exports.signup = (req, res) => {
         email: req.body.email,
         class:req.body.classnum,
 
-    }).then(function (User)  {
-            return Password.create({
+    }).then(() => {
+        User.findOne({
+            where: {
+                username: req.body.username
+            }
+        }).then((User) =>{
+            Password.create({
                 user_id:User.id,
                 passwd: bcrypt.hashSync(req.body.password,2),
-            })
-           .then(()=> {
-               res.send({ message: "User was registered successfully!" });
-           });
+            }).then(res.send({ message: "User was registered successfully!" })).catch(err => {
+                res.status(500).send({ message: err.message });});
+        }).catch(err => {
+            res.status(500).send({ message: err.message });});
+
     }).catch(err => {
             res.status(500).send({ message: err.message });
     });
@@ -53,8 +58,7 @@ exports.signin = (req, res) => {
                         message: "Invalid Password!"
                     });
                 }
-
-                let token = jwt.sign({ id: user.id }, config.secret, {
+                let token = jwt.sign({ id: User.id }, config.secret, {
                     expiresIn: 86400 // 24 hours
                 });
 
