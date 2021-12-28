@@ -32,6 +32,7 @@ export default class Home extends React.Component {
 
         AuthService.modifyUserData(this.state.newEmail, this.state.newClassNum,this.state.currentUser.username).then(
             () => {
+                this.state.currentUser=AuthService.getCurrentUser();
                 window.location.reload();
             },
             error => {

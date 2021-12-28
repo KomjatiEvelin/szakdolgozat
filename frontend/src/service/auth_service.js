@@ -41,7 +41,13 @@ class AuthService {
             email,
             classnum,
             username
-        },{ headers: authHeader() });
+        },{ headers: authHeader() }).then(response => {
+            if (response.status===200) {
+                localStorage.setItem("user", JSON.stringify(response.data));
+            }
+
+            return response.data;
+        });
 
     }
 }

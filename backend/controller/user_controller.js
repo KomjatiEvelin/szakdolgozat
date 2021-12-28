@@ -80,14 +80,24 @@ exports.updateUser = (req, res) => {
         User.update({ email: req.body.email,
             class:req.body.classnum}, {where: {username:req.body.username}}
 
-        ).then((self)=>{
+        ).then(()=>{
+            User.findOne({
+                where: {
+                    username: req.body.username
+                }}).then(function (User){
+                    return res.status(200).send({
+                        id: User.id,
+                        email: User.email,
+                        class:User.class,
+                        username: User.username,
+                        accessToken:  req.headers["x-access-token"]
+                    });
+                }
+            ).catch(err => {
+                    res.status(500).send({ message: err.message });
 
-            res.status(200).send({
-                id: self.id,
-                email: self.email,
-                class:self.class,
-                username: self.username,
-            });
+                    console.log(err.message);
+                })
 
 
         }).catch(err => {
