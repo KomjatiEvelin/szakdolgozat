@@ -1,14 +1,15 @@
 import React from "react";
-import AuthService from "../../service/auth_service";
-import {Button, Card} from "react-bootstrap";
+import UserService from "../../service/user_service";
+import {Button, Card, Table} from "react-bootstrap";
 import Popup from 'reactjs-popup';
+import user_icon from "../../assets/user_icon.png";
 
 
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
             newEmail:"",
             newClassNum: "",
             newPassword:"",
@@ -17,6 +18,11 @@ export default class Home extends React.Component {
         };
         this.formOnChange = this.formOnChange.bind(this);
         this.handleSubmit=this.handleSubmit.bind(this);
+        this.logOut = this.logOut.bind(this);
+    }
+
+    logOut() {
+        UserService.logout();
     }
 
     formOnChange(event){
@@ -30,9 +36,9 @@ export default class Home extends React.Component {
             loading: true
         });
 
-        AuthService.modifyUserData(this.state.newEmail, this.state.newClassNum,this.state.currentUser.username).then(
+        UserService.modifyUserData(this.state.newEmail, this.state.newClassNum,this.state.currentUser.username).then(
             () => {
-                this.state.currentUser=AuthService.getCurrentUser();
+                this.setState({currentUser:UserService.getCurrentUser()});
                 window.location.reload();
             },
             error => {
@@ -55,9 +61,12 @@ export default class Home extends React.Component {
         const {currentUser} = this.state;
 
         return (
-            <div style={{ width: '100%',margin:'0'}}>
-                <Card style={{ width: '25rem',margin:"10px", backgroundColor:'rgba(99, 156, 156, 0.65)' , fontSize:'10'}}>
-                    <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)'}}>Profil adatok</Card.Header>
+            <div style={{ width: '100%',margin:'0', display:'flex'}}>
+                <Card style={{ width: '25rem',margin:"10px", backgroundColor:'rgba(171, 151, 0, 0.65)' , fontSize:'10'}}>
+                    <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)', textAlign:"center"}}>
+                        Profil adatok
+                            <img src={user_icon} alt={"icon"} style={{width:"50%", margin:"10px"}}/>
+                    </Card.Header>
                     <Card.Body>
                         <Card.Text>
                             <h5>Felhasználónév: {currentUser.username}</h5>
@@ -66,7 +75,7 @@ export default class Home extends React.Component {
                             <h5>Osztály: {currentUser.class}</h5>
                         </Card.Text>
 
-                        <Popup trigger={<Button>Adatok módosítása</Button>}>
+                        <Popup trigger={<Button style={{margin:'5px'}}>Adatok módosítása</Button>}>
                             <form method="POST" onSubmit={this.handleSubmit}>
                                 <div className="mb-3">
                                     <label htmlFor="e-mail" className="form-label">Új e-mail</label>
@@ -83,12 +92,32 @@ export default class Home extends React.Component {
                                 <Button type="submit" className="btn btn-primary">Módosítás</Button>
                             </form>
                         </Popup>
+                        <Button href="/users/login" onClick={this.logOut} style={{margin:'5px'}}>Kijelentkezés</Button>
                     </Card.Body>
                 </Card>
-                <Card style={{ width: '25rem',margin:"10px", backgroundColor:'rgba(99, 156, 156, 0.65)' , fontSize:'10'}}>
+                <Card style={{ width: '100%',margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'10'}}>
                     <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)'}}>Korábbi eredmények</Card.Header>
                     <Card.Body>
-                        <Card.Text></Card.Text>
+                        <Table striped bordered hover variant={"dark"}>
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Témakör</th>
+                                <th>Feladat</th>
+                                <th>Időpont</th>
+                                <th>Pontszám</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Alapműveletek</td>
+                                <td>Kiegészítő</td>
+                                <td>2021.12.28. 16:57</td>
+                                <td>32</td>
+                            </tr>
+                            </tbody>
+                        </Table>
                     </Card.Body>
                 </Card>
 

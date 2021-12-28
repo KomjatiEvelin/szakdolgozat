@@ -1,7 +1,7 @@
 import React from "react";
 import { Card ,Button} from 'react-bootstrap';
 
-import AuthService from "../../service/auth_service";
+import AuthService from "../../service/user_service";
 
 class RegPage extends React.Component {
 

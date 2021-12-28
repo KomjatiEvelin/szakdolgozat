@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import UserService from "../../service/user_service";
+import MaterialService from "../../service/material_service";
 
-export default class BoardUser extends Component {
+export default class LearningMaterials extends Component {
     constructor(props) {
         super(props);
 
@@ -12,7 +12,7 @@ export default class BoardUser extends Component {
     }
 
     componentDidMount() {
-        UserService.getUserBoard().then(
+        MaterialService.getLearningMaterials().then(
             response => {
                 this.setState({
                     content: response.data

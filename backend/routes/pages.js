@@ -1,5 +1,5 @@
 const { authJwt } = require("../security");
-const controller = require("../controller/mainpage_controller");
+const controller = require("../controller/learningMat_controller");
 const express = require("express");
 const router = express.Router();
 
@@ -12,11 +12,11 @@ const router = express.Router();
         next();
     });
 
-    router.get("/home", controller.allAccess);
+
 
     router.get(
-        "/user",
+        "/materials",
         [authJwt.verifyToken],
-        controller.userBoard
+        controller.learningMaterials
     );
 module.exports = router;
