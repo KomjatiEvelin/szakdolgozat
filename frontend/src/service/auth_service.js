@@ -1,4 +1,5 @@
 import axios from "axios";
+import authHeader from './auth_header';
 
 const API_URL = "http://localhost:9000/users/";
 
@@ -33,6 +34,15 @@ class AuthService {
 
     getCurrentUser() {
         return JSON.parse(localStorage.getItem('user'));;
+    }
+
+    modifyUserData(email,classnum,username){
+        return axios.put(API_URL+"update",{
+            email,
+            classnum,
+            username
+        },{ headers: authHeader() });
+
     }
 }
 

@@ -2,6 +2,7 @@ const { verifySignUp } = require("../security");
 const controller = require("../controller/user_controller");
 const express = require("express");
 const router = express.Router();
+const { authJwt } = require("../security");
 
 
    router.use(function(req, res, next) {
@@ -21,5 +22,8 @@ const router = express.Router();
     );
 
     router.post("/login", controller.signin);
+
+router.put(
+    "/update", [authJwt.verifyToken],  controller.updateUser);
 
 module.exports = router;

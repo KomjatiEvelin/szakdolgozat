@@ -74,3 +74,25 @@ exports.signin = (req, res) => {
             res.status(500).send({ message: err.message });
         });
 };
+
+exports.updateUser = (req, res) => {
+
+        User.update({ email: req.body.email,
+            class:req.body.classnum}, {where: {username:req.body.username}}
+
+        ).then((self)=>{
+
+            res.status(200).send({
+                id: self.id,
+                email: self.email,
+                class:self.class,
+                username: self.username,
+            });
+
+
+        }).catch(err => {
+        res.status(500).send({ message: err.message });
+
+            console.log(err.message);
+    });
+};
