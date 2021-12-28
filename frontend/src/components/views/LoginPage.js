@@ -1,5 +1,5 @@
 import React from "react";
-import { Card ,Button} from 'react-bootstrap';
+import {Card, Button, ToastContainer, Toast} from 'react-bootstrap';
 import AuthService from "../../service/user_service";
 
 
@@ -11,10 +11,18 @@ class LoginPage extends React.Component {
             userName:"",
             password:"",
             loading:false,
+            toastShown:false,
+            toastVariant:"",
             message: ""
         };
         this.formOnChange = this.formOnChange.bind(this);
         this.handleSubmit=this.handleSubmit.bind(this);
+        this.closeToast=this.closeToast.bind(this);
+    }
+
+    closeToast(){
+
+        this.setState({toastShown:false})
     }
 
     formOnChange(event){
@@ -44,7 +52,9 @@ class LoginPage extends React.Component {
 
                 this.setState({
                     loading: false,
-                    message: resMessage
+                    message: resMessage,
+                    toastShown:true,
+                    toastVariant:"danger"
                 });
             }
         );
@@ -54,7 +64,7 @@ class LoginPage extends React.Component {
     render() {
 
         return (
-
+        <>
             <Card style={{ width: '25rem', margin:"auto",marginTop:"10rem", backgroundColor:'rgba(99, 156, 156, 0.65)'}}>
                 <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)'}}>Bejelentkezés</Card.Header>
                 <Card.Body>
@@ -76,7 +86,17 @@ class LoginPage extends React.Component {
                             </form>
                     </Card.Text>
                 </Card.Body>
-            </Card>);
+            </Card>
+        <ToastContainer position="top-center" className="p-3">
+            <Toast onClose={this.closeToast} show={this.state.toastShown} bg={this.state.toastVariant}>
+                <Toast.Header>
+
+                </Toast.Header>
+                <Toast.Body>{this.state.message}</Toast.Body>
+            </Toast>
+        </ToastContainer>
+    </>
+    );
     }
 }
 export default LoginPage

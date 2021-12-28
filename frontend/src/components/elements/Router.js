@@ -8,12 +8,8 @@ import Home from "../../components/views/Home";
 import LearningMaterials from "../../components/views/LearningMaterials";
 
 class Router extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
-
 
         return (
             <div style={{margin:'20px'}}>

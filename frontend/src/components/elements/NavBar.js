@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import AuthService from "../../service/user_service";
-import {Container, Navbar, Nav} from "react-bootstrap";
+import {Navbar, Nav} from "react-bootstrap";
 
 
 import user_icon from "../../assets/user_icon.png";

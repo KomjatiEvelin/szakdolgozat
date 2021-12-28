@@ -1,5 +1,5 @@
 import React from "react";
-import { Card ,Button} from 'react-bootstrap';
+import { Card ,Button, Toast, ToastContainer} from 'react-bootstrap';
 
 import AuthService from "../../service/user_service";
 
@@ -13,10 +13,13 @@ class RegPage extends React.Component {
             password: "",
             class:"",
             successful: false,
+            toastShown:false,
+            toastVariant:"",
             message: ""
         };
         this.handleSubmit=this.handleSubmit.bind(this);
         this.formOnChange=this.formOnChange.bind(this);
+        this.closeToast=this.closeToast.bind(this);
 
 
     }
@@ -36,7 +39,9 @@ class RegPage extends React.Component {
             response => {
                 this.setState({
                     message: response.data.message,
-                    successful: true
+                    successful: true,
+                    toastShown:true,
+                    toastVariant:"success"
                 });
             },
             error => {
@@ -49,7 +54,9 @@ class RegPage extends React.Component {
 
                 this.setState({
                     successful: false,
-                    message: resMessage
+                    message: resMessage,
+                    toastShown:true,
+                    toastVariant:"danger"
                 });
             }
         );
@@ -60,9 +67,15 @@ class RegPage extends React.Component {
         this.setState({[name] : value});
     }
 
+    closeToast(){
+
+        this.setState({toastShown:false})
+    }
+
     render() {
 
         return (
+           <>
             <Card style={{ width: '25rem', margin:"auto",marginTop:"10rem", backgroundColor:'rgba(99, 156, 156, 0.65)'}}>
                 <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)'}}>Regisztráció</Card.Header>
                 <Card.Body>
@@ -93,7 +106,16 @@ class RegPage extends React.Component {
                     </Card.Text>
 
                 </Card.Body>
-            </Card>);
+             </Card>
+               <ToastContainer position="top-center" className="p-3">
+               <Toast onClose={this.closeToast} show={this.state.toastShown} bg={this.state.toastVariant}>
+                   <Toast.Header>
+
+                   </Toast.Header>
+                   <Toast.Body>{this.state.message}</Toast.Body>
+               </Toast>
+               </ToastContainer>
+           </>);
     }
 }
 export default RegPage

@@ -1,6 +1,6 @@
 import React from "react";
 import UserService from "../../service/user_service";
-import {Button, Card, Table} from "react-bootstrap";
+import {Button, Card, Table, Toast, ToastContainer} from "react-bootstrap";
 import Popup from 'reactjs-popup';
 import user_icon from "../../assets/user_icon.png";
 
@@ -14,11 +14,19 @@ export default class Home extends React.Component {
             newClassNum: "",
             newPassword:"",
             loading:false,
+            toastShown:false,
+            toastVariant:"",
             message: ""
         };
         this.formOnChange = this.formOnChange.bind(this);
         this.handleSubmit=this.handleSubmit.bind(this);
         this.logOut = this.logOut.bind(this);
+        this.closeToast=this.closeToast.bind(this);
+    }
+
+    closeToast(){
+
+        this.setState({toastShown:false})
     }
 
     logOut() {
@@ -37,9 +45,12 @@ export default class Home extends React.Component {
         });
 
         UserService.modifyUserData(this.state.newEmail, this.state.newClassNum,this.state.currentUser.username).then(
-            () => {
-                this.setState({currentUser:UserService.getCurrentUser()});
-                window.location.reload();
+           ()=> {
+               const resMessage="Successfully modified!";
+                this.setState({currentUser:UserService.getCurrentUser(),
+                    toastShown:true,
+                    toastVariant:"success",
+                    message:resMessage});
             },
             error => {
                 const resMessage =
@@ -51,7 +62,9 @@ export default class Home extends React.Component {
 
                 this.setState({
                     loading: false,
-                    message: resMessage
+                    message: resMessage,
+                    toastShown:true,
+                    toastVariant:"danger",
                 });
             }
         );
@@ -92,7 +105,7 @@ export default class Home extends React.Component {
                                 <Button type="submit" className="btn btn-primary">Módosítás</Button>
                             </form>
                         </Popup>
-                        <Button href="/users/login" onClick={this.logOut} style={{margin:'5px'}}>Kijelentkezés</Button>
+                        <Button href="/users/login" onClick={this.logOut} style={{margin:'5px'}} variant="danger">Kijelentkezés</Button>
                     </Card.Body>
                 </Card>
                 <Card style={{ width: '100%',margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'10'}}>
@@ -120,7 +133,14 @@ export default class Home extends React.Component {
                         </Table>
                     </Card.Body>
                 </Card>
+                <ToastContainer position="top-center" className="p-3">
+                    <Toast onClose={this.closeToast} show={this.state.toastShown} bg={this.state.toastVariant}>
+                        <Toast.Header>
 
+                        </Toast.Header>
+                        <Toast.Body>{this.state.message}</Toast.Body>
+                    </Toast>
+                </ToastContainer>
             </div>
         );
     }

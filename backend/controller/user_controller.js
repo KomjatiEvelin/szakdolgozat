@@ -85,24 +85,22 @@ exports.updateUser = (req, res) => {
                 where: {
                     username: req.body.username
                 }}).then(function (User){
-                    return res.status(200).send({
+                    res.status(200).send({
                         id: User.id,
                         email: User.email,
                         class:User.class,
                         username: User.username,
-                        accessToken:  req.headers["x-access-token"]
+                        accessToken:  req.headers["x-access-token"],
+                        message: "Successfully updated!"
                     });
                 }
             ).catch(err => {
                     res.status(500).send({ message: err.message });
-
-                    console.log(err.message);
                 })
 
 
         }).catch(err => {
         res.status(500).send({ message: err.message });
 
-            console.log(err.message);
     });
 };
