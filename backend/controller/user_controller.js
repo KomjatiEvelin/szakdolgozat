@@ -2,6 +2,7 @@ const db = require("../model");
 const config = require("../config/auth_config");
 const User = db.user;
 const Password = db.password;
+const Result=db.result;
 
 
 const jwt = require("jsonwebtoken");
@@ -104,3 +105,18 @@ exports.updateUser = (req, res) => {
 
     });
 };
+
+exports.getUsersResults=(req,res)=>{
+    Result.findAll(
+        {where: {user_id: req.query.userid}})
+        .then(Result=>{
+           res.status(200).send(res.json(Result));
+           console.log(res.json(Result));
+        })
+        .catch(err => {
+        res.status(500).send({message: err.message});
+
+            console.log(err.message);
+        });
+
+}

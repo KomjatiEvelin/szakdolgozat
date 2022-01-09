@@ -16,12 +16,21 @@ export default class Home extends React.Component {
             loading:false,
             toastShown:false,
             toastVariant:"",
-            message: ""
+            message: "",
+            results:[]
         };
         this.formOnChange = this.formOnChange.bind(this);
         this.handleSubmit=this.handleSubmit.bind(this);
         this.logOut = this.logOut.bind(this);
         this.closeToast=this.closeToast.bind(this);
+    }
+
+
+    componentDidMount() {
+        if(this.state.currentUser!=null){
+         UserService.getResults(this.state.currentUser.id).then((res)=>
+            this.setState({results: res}));
+        }
     }
 
     closeToast(){
@@ -73,6 +82,10 @@ export default class Home extends React.Component {
     render() {
         const {currentUser} = this.state;
 
+        if(UserService.getCurrentUser()==null){
+            this.props.history.push("/users/login");
+            window.location.reload();
+        }
         return (
             <div style={{ width: '100%',margin:'0', display:'flex'}}>
                 <Card style={{ width: '25rem',margin:"10px", backgroundColor:'rgba(171, 151, 0, 0.65)' , fontSize:'10'}}>
@@ -122,13 +135,15 @@ export default class Home extends React.Component {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Alapműveletek</td>
-                                <td>Kiegészítő</td>
-                                <td>2021.12.28. 16:57</td>
-                                <td>32</td>
-                            </tr>
+
+                                {this.state.results.map(res => (<tr>
+                                    <td></td>
+                                    <td>{res.id}</td>
+                                    <td>{res.excercise_id}</td>
+                                    <td>{res.time}</td>
+                                    <td>{res.point}</td>
+                                </tr>))}
+
                             </tbody>
                         </Table>
                     </Card.Body>

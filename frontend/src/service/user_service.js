@@ -50,6 +50,11 @@ class AuthService {
         });
 
     }
+
+    getResults(userid){
+
+        return axios.get(API_URL+`results?userid=${userid}`,{ headers: authHeader() }).then((response)=>response.data);
+    }
 }
 
 export default new AuthService();

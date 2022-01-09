@@ -26,4 +26,6 @@ const { authJwt } = require("../security");
 router.put(
     "/update", [authJwt.verifyToken],  controller.updateUser);
 
+router.get("/results",[authJwt.verifyToken],controller.getUsersResults);
+
 module.exports = router;

@@ -37,11 +37,11 @@ class NavBar extends Component {
                         <div style={{ width: '100%', display:'flex'}}>
                             <Nav className="me-auto mx-4 " style={{ maxHeight: '100px' ,margin:'5px'}}>
                                 <Nav.Link href="/pages/materials">Tananyagok</Nav.Link>
-                                <Nav.Link href="/">Feladatok</Nav.Link>
+                                <Nav.Link href="/pages/materials">Feladatok</Nav.Link>
                             </Nav>
                             <Nav className="my-auto mx-4 justify-content-end ">
 
-                                    <Nav.Link hrefo={"/"} className="nav-link">
+                                    <Nav.Link href={"/"} className="nav-link">
                                         <img src={user_icon} alt={"icon"} style={{height:'30px', marginRight:'5px'}}/>{currentUser.username}
                                     </Nav.Link>
                             </Nav>
