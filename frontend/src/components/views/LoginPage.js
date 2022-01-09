@@ -65,7 +65,7 @@ class LoginPage extends React.Component {
 
         return (
         <>
-            <Card style={{ width: '25rem', margin:"auto",marginTop:"10rem", backgroundColor:'rgba(99, 156, 156, 0.65)'}}>
+            <Card style={{ width: '25rem', margin:"auto",marginTop:"10rem", backgroundColor:'rgba(171, 151, 0, 0.65)'}}>
                 <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)'}}>Bejelentkezés</Card.Header>
                 <Card.Body>
                     <Card.Text>
@@ -77,10 +77,6 @@ class LoginPage extends React.Component {
                                 <div className="mb-3">
                                     <label htmlFor="password" className="form-label">Jelszó</label>
                                     <input onChange={this.formOnChange} type="password" className="form-control" name="password"/>
-                                </div>
-                                <div className="mb-3 form-check">
-                                    <input type="checkbox" className="form-check-input"/>
-                                        <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
                                 </div>
                                 <Button type="submit" className="btn btn-primary">Bejelentkezés</Button>
                             </form>

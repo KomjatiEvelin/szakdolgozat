@@ -15,7 +15,10 @@ class RegPage extends React.Component {
             successful: false,
             toastShown:false,
             toastVariant:"",
-            message: ""
+            message: "",
+            emailValid: false,
+            passwordValid: false,
+            usernameValid: false
         };
         this.handleSubmit=this.handleSubmit.bind(this);
         this.formOnChange=this.formOnChange.bind(this);
@@ -24,12 +27,27 @@ class RegPage extends React.Component {
 
     }
 
+    validateFields() {
+        let emailValid= this.state.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        let passwordValid = this.state.password.length >= 6 && this.state.password.match();
+        let usernameValid = true;
+
+
+        this.setState({
+            emailValid: emailValid,
+            passwordValid: passwordValid,
+            usernameValid: usernameValid
+        });
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         this.setState({
             message: "",
             successful: false
         });
+        this.validateFields();
+        if(this.state.emailValid&&this.state.usernameValid&&this.state.passwordValid){
         AuthService.register(
             this.state.userName,
             this.state.class,
@@ -59,7 +77,15 @@ class RegPage extends React.Component {
                     toastVariant:"danger"
                 });
             }
-        );
+        );}
+        else{
+            this.setState({
+                successful: false,
+                message: "Nem megfelelő formátum",
+                toastShown:true,
+                toastVariant:"danger"
+            });
+        }
     }
 
     formOnChange(event){
@@ -76,7 +102,7 @@ class RegPage extends React.Component {
 
         return (
            <>
-            <Card style={{ width: '25rem', margin:"auto",marginTop:"10rem", backgroundColor:'rgba(99, 156, 156, 0.65)'}}>
+            <Card style={{ width: '25rem', margin:"auto",marginTop:"10rem", backgroundColor:'rgba(171, 151, 0, 0.65)'}}>
                 <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)'}}>Regisztráció</Card.Header>
                 <Card.Body>
                     <Card.Text>
@@ -94,12 +120,8 @@ class RegPage extends React.Component {
                                 <input onChange={this.formOnChange} type="password" className="form-control" name="password"/>
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="exampleInputPassword2" className="form-label">Jelszó ismét</label>
-                                <input type="password" className="form-control" name="password2"/>
-                            </div>
-                            <div className="mb-3">
                                 <label className="form-label" htmlFor="exampleClassk1">Évfolyam</label>
-                                <input onChange={this.formOnChange} type="number" className="form-control" name="class"/>
+                                <input onChange={this.formOnChange} type="number" className="form-control" min="1" max={"4"} name="class"/>
                             </div>
                             <Button type="submit" variant="primary">Regisztráció</Button>
                         </form>
