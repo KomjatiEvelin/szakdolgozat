@@ -115,8 +115,6 @@ exports.getUsersResults=(req,res)=>{
         })
         .catch(err => {
         res.status(500).send({message: err.message});
-
-            console.log(err.message);
         });
 
 }

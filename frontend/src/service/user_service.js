@@ -53,7 +53,7 @@ class AuthService {
 
     getResults(userid){
 
-        return axios.get(API_URL+`results?userid=${userid}`,{ headers: authHeader() }).then((response)=>response.data);
+        return axios.get(API_URL+`results?userid=${userid}`).then((response)=>response.data);
     }
 }
 
