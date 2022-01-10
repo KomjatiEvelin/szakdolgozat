@@ -17,7 +17,9 @@ export default class Home extends React.Component {
             toastShown:false,
             toastVariant:"",
             message: "",
-            results:[]
+            results:[],
+            emailValid: false,
+            passwordValid: false
         };
         this.formOnChange = this.formOnChange.bind(this);
         this.handleSubmit=this.handleSubmit.bind(this);
@@ -46,6 +48,18 @@ export default class Home extends React.Component {
         const {name,value} = event.target;
         this.setState({[name] : value});
     }
+
+    validateFields() {
+        let emailValid= this.state.newEmail.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        let passwordValid = this.state.newPassword.length >= 6 && this.state.newPassword.match();
+
+
+        this.setState({
+            emailValid: emailValid,
+            passwordValid: passwordValid
+        });
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         this.setState({
@@ -53,6 +67,8 @@ export default class Home extends React.Component {
             loading: true
         });
 
+        this.validateFields();
+        if(this.state.emailValid&&this.state.passwordValid){
         UserService.modifyUserData(this.state.newEmail, this.state.newClassNum,this.state.currentUser.username).then(
            ()=> {
                const resMessage="Successfully modified!";
@@ -75,8 +91,17 @@ export default class Home extends React.Component {
                     toastShown:true,
                     toastVariant:"danger",
                 });
+            } );
+        }
+        else{
+                this.setState({
+                    successful: false,
+                    message: "Nem megfelelő formátum",
+                    toastShown:true,
+                    toastVariant:"danger"
+                });
             }
-        );
+
     }
 
     render() {
@@ -109,7 +134,7 @@ export default class Home extends React.Component {
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="classNumber" className="form-label">Új osztály</label>
-                                    <input onChange={this.formOnChange} type="number" className="form-control" name="newClassNum"/>
+                                    <input onChange={this.formOnChange} type="number" className="form-control"  min="1" max={"4"} name="newClassNum"/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="password" className="form-label">Új jelszó</label>
@@ -127,21 +152,17 @@ export default class Home extends React.Component {
                         <Table striped bordered hover variant={"dark"}>
                             <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Témakör</th>
                                 <th>Feladat</th>
-                                <th>Időpont</th>
                                 <th>Pontszám</th>
+                                <th>Időpont</th>
                             </tr>
                             </thead>
                             <tbody>
 
                                 {this.state.results.map(res => (<tr>
-                                    <td></td>
-                                    <td>{res.id}</td>
                                     <td>{res.excercise_id}</td>
-                                    <td>{res.time}</td>
                                     <td>{res.point}</td>
+                                    <td>{res.time}</td>
                                 </tr>))}
 
                             </tbody>

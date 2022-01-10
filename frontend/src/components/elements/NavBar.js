@@ -37,7 +37,7 @@ class NavBar extends Component {
                         <div style={{ width: '100%', display:'flex'}}>
                             <Nav className="me-auto mx-4 " style={{ maxHeight: '100px' ,margin:'5px'}}>
                                 <Nav.Link href="/pages/materials">Tananyagok</Nav.Link>
-                                <Nav.Link href="/pages/materials">Feladatok</Nav.Link>
+                                <Nav.Link href="/pages/games">Feladatok</Nav.Link>
                             </Nav>
                             <Nav className="my-auto mx-4 justify-content-end ">
 

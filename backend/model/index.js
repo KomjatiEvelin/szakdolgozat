@@ -27,6 +27,7 @@ db.sequelize = sequelize;
 db.user = require("../model/user_model.js")(sequelize, Sequelize);
 db.password = require("../model/auth_model.js")(sequelize, Sequelize);
 db.result= require("../model/results_model.js")(sequelize, Sequelize);
+db.exercise= require("../model/exercise_model.js")(sequelize, Sequelize);
 
 
 module.exports = db;

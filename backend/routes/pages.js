@@ -1,5 +1,6 @@
 const { authJwt } = require("../security");
 const controller = require("../controller/learningMat_controller");
+const controller2=require("../controller/exercise_controller")
 const express = require("express");
 const router = express.Router();
 
@@ -19,4 +20,7 @@ const router = express.Router();
         [authJwt.verifyToken],
         controller.learningMaterials
     );
+
+    router.get("/games",[authJwt.verifyToken],controller2.showExercises);
+
 module.exports = router;
