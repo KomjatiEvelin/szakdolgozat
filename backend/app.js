@@ -14,7 +14,7 @@ const db = require("./model");
 
 db.sequelize.sync();
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('pages', path.join(__dirname, 'pages'));
 app.set('view engine', 'jade');
 
 app.use(cors({

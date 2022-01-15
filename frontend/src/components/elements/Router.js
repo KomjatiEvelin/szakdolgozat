@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
 
-import Login from "../../components/views/LoginPage";
-import Register from "../../components/views/RegPage";
-import Home from "../../components/views/Home";
-import LearningMaterials from "../../components/views/LearningMaterials";
-import Games from "../../components/views/Games";
+import Login from "../pages/LoginPage";
+import Register from "../pages/RegPage";
+import Home from "../pages/Home";
+import LearningMaterials from "../pages/LearningMaterials";
+import Games from "../pages/Games";
 
 class Router extends Component {
 
