@@ -20,6 +20,8 @@ class Router extends Component {
                         <Route exact path="/users/register" component={Register} />
                         <Route path="/pages/materials" component={LearningMaterials} />
                         <Route path="/pages/games" component={Games} />
+                        <Route path="/pages/games/labirintgame" component={Games} />
+                        <Route path="/pages/games/additiongame" component={Games} />
                     </Switch>
             </div>
         );
