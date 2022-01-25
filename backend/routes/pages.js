@@ -23,4 +23,6 @@ const router = express.Router();
 
     router.get("/games",[authJwt.verifyToken],controller2.showExercises);
 
+    router.get("/games/additongame",[authJwt.verifyToken]);
+
 module.exports = router;

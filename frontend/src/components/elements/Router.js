@@ -7,6 +7,7 @@ import Register from "../pages/RegPage";
 import Home from "../pages/Home";
 import LearningMaterials from "../pages/LearningMaterials";
 import Games from "../pages/Games";
+import Addition from "../games/AdditionGame";
 
 class Router extends Component {
 
@@ -20,8 +21,8 @@ class Router extends Component {
                         <Route exact path="/users/register" component={Register} />
                         <Route path="/pages/materials" component={LearningMaterials} />
                         <Route path="/pages/games" component={Games} />
-                        <Route path="/pages/games/labirintgame" component={Games} />
-                        <Route path="/pages/games/additiongame" component={Games} />
+                        <Route exact path="/games/labirintgame" component={Games} />
+                        <Route exact path="/games/additiongame" component={Addition} />
                     </Switch>
             </div>
         );

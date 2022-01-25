@@ -33,7 +33,7 @@ export default class Games extends Component {
                     <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)'}}>{cont.name}</Card.Header>
                     <Card.Img variant="top" src={require(`../../assets/${cont.theme}`).default} alt={"logo"}/>
                     <Card.Body>
-                        <Button href={`/pages/games${cont.link}`} style={{margin:'5px', width:'100%', fontSize:'24px'}} variant="danger">Játszom</Button>
+                        <Button href={`/games${cont.link}`} style={{margin:'5px', width:'100%', fontSize:'24px'}} variant="danger">Játszom</Button>
                     </Card.Body>
                 </Card>
                     ))}
