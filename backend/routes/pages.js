@@ -25,4 +25,6 @@ const router = express.Router();
 
     router.get("/games/additongame",[authJwt.verifyToken]);
 
+    router.post("/games/savescore",controller2.saveScore);
+
 module.exports = router;

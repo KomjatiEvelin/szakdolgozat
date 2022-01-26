@@ -9,6 +9,14 @@ class GameService {
         return axios.get(API_URL + `games?classnum=${classnum}`, { headers: authHeader() }).then((response)=>response.data);
     }
 
+    saveScore(userid,gameid,score){
+        return axios.post(API_URL+'games/savescore', {
+            userid,
+            gameid,
+            score
+        }).then((response)=>response.data);
+    }
+
 }
 
 export default new GameService();

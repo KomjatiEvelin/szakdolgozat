@@ -21,7 +21,8 @@ class Router extends Component {
                         <Route exact path="/users/register" component={Register} />
                         <Route path="/pages/materials" component={LearningMaterials} />
                         <Route path="/pages/games" component={Games} />
-                        <Route exact path="/games/labirintgame" component={Games} />
+                        <Route exact path="
+                        /games/labirintgame" component={Games} />
                         <Route exact path="/games/additiongame" component={Addition} />
                     </Switch>
             </div>
