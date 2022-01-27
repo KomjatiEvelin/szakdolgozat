@@ -1,11 +1,11 @@
 const db = require("../model");
 const Exercise=db.exercise;
 const Result=db.result;
-
+const { Op } = require("sequelize");
 
 exports.showExercises = (req, res) => {
    Exercise.findAll(
-        {where: {class: req.query.classnum}})
+        {where: {class: {[Op.lte]: req.query.classnum}}})
         .then(Res=>{
             res.status(200).send(res.json(Res));
             console.log(res.json(Res));
