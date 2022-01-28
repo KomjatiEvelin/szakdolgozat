@@ -8,7 +8,7 @@ import banana_icon from "../../assets/banana.png";
 
 const User=UserService.getCurrentUser();
 
-const Score=({value})=><div>{`Score: ${value}`}</div>
+const Score=({value, maxScore})=><div>{`Score: ${value} / ${maxScore}`}</div>
 
 let TIME_LIMIT=60000;
 
@@ -42,16 +42,18 @@ const Addition=()=>{
 
     const [playing, setPlaying]=useState(false);
     const [score, setScore]=useState(0);
+    const [maxScore, setMaxScore]=useState(0);
     const [finished,setFinished]=useState(false);
 
     const endGame=()=>{
         setPlaying(false)
         setFinished(true)
-        GameService.saveScore(User.id,1,score).then(()=>"Success!")
+        GameService.saveScore(User.id,1,score,maxScore).then(()=>"Success!")
     }
 
     const startGame=()=>{
         setScore(0)
+        setMaxScore(0)
         setPlaying(true)
         setFinished(false)
     }
@@ -79,9 +81,20 @@ const Addition=()=>{
 
             setScore(score+1);
         }
+        setMaxScore(maxScore+1);
         setNum1(generateNumber);
         setNum2(generateNumber);
         setInput('');
+    }
+
+    const splitUpNums=(num)=>{
+        let numstr=num.toString()
+        switch (num.toString().length) {
+            case 1: return numstr;
+            case 2: return numstr[0]+'0+'+numstr[1];
+            case 3: return numstr[0]+'00+'+numstr[1]+'0+'+numstr[2];
+            case 4: return numstr[0]+'000+'+numstr[1]+'00+'+numstr[2]+'0+'+numstr[3];
+        }
     }
     return(
         <Card style={{padding:'5px', margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'20px',  textAlign:'center'}}>
@@ -100,16 +113,22 @@ const Addition=()=>{
                 <RedMedals num={num2}/></>)
                 }
 
-                //TODO get apart to place value
+                {(User.class>1)&&(<>
+                    <h2 style={{color:"darkred"}}>{splitUpNums(num1)}</h2>
+                    <h2>+</h2>
+                    <h2 style={{color:"blue"}}> {splitUpNums(num2)}</h2>
+                    <h2>=</h2>
+                    <input type={"number"}/> + <input type={"number"} /> + <input  type={"number"}/> +<input  type={"number"}/>
+                </>)}
 
-                <Score value={score}/>
+                <Score value={score} maxScore={maxScore}/>
                 <Timer time={TIME_LIMIT} onEnd={endGame}/><br/>
                 <Button size={"lg"} variant="primary" onClick={checkResult}>Ellenőrzés</Button>
             </Card.Text>)}
 
             {finished &&
             <Card.Text>
-                <Score value={score}/>
+                <Score value={score} maxScore={maxScore}/>
                 <Button variant="primary" size={"lg"} onClick={startGame}>Újra</Button>
                 <Button href="/pages/games" variant="primary" size={"lg"}>Vissza a menübe</Button>
 

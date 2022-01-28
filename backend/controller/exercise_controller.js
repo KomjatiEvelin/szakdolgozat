@@ -19,7 +19,7 @@ exports.saveScore=(req,res)=>{
    Result.create({
         user_id: req.body.userid,
         excercise_id: req.body.gameid,
-        point:req.body.score,
+        point:req.body.score+"/"+req.body.maxScore,
         time:Date.now(),
 
     }).then(Res=>{
