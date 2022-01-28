@@ -9,7 +9,7 @@ const User=UserService.getCurrentUser();
 
 const Score=({value, maxScore})=><div>{`Score: ${value} / ${maxScore}`}</div>
 
-const Fractions=()=>{
+const Multiplication=()=>{
 
     const [playing, setPlaying]=useState(false);
     const [score, setScore]=useState(0);
@@ -19,7 +19,7 @@ const Fractions=()=>{
     const endGame=()=>{
         setPlaying(false)
         setFinished(true)
-        GameService.saveScore(User.id,3,score,maxScore).then(()=>"Success!")
+        GameService.saveScore(User.id,2,score,maxScore).then(()=>"Success!")
     }
 
     const startGame=()=>{
@@ -32,8 +32,8 @@ const Fractions=()=>{
     return(
         <Card style={{padding:'5px', margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'20px',  textAlign:'center'}}>
             {!playing &&!finished && <Card.Text>
-                <h1>Tört számok</h1>
-                <h3>Gyakorold a törteket</h3>
+                <h1>Szorzás gyakorlása</h1>
+                <h3>Gyakorold a szorzótáblát</h3>
                 <h3>Tipp: az ábra segít a számolásban</h3>
                 <Button size={"lg"} variant="primary" onClick={startGame}>Játék indítása</Button>
             </Card.Text>}
@@ -57,4 +57,4 @@ const Fractions=()=>{
         </Card>)
 }
 
-export default Fractions;
+export default Multiplication;
