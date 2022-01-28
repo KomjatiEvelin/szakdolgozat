@@ -162,7 +162,7 @@ export default class Home extends React.Component {
                                 {this.state.results.map(res => (<tr>
                                     <td>{res.excercise_id}</td>
                                     <td>{res.point}</td>
-                                    <td>{res.time}</td>
+                                    <td>{new Date(res.time).toLocaleString()}</td>
                                 </tr>))}
 
                             </tbody>
