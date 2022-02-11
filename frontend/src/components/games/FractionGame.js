@@ -1,13 +1,11 @@
-import React, { useEffect, useRef, useState} from 'react';
+import React, { useState} from 'react';
 import {Button, Card} from "react-bootstrap";
 import UserService from "../../service/user_service";
 import GameService from "../../service/game_service";
-
+import Score from "../elements/Score";
 
 
 const User=UserService.getCurrentUser();
-
-const Score=({value, maxScore})=><div>{`Score: ${value} / ${maxScore}`}</div>
 
 const Fractions=()=>{
 

@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 
 import MaterialService from "../../service/material_service";
+import {Button, Card} from "react-bootstrap";
 
 export default class LearningMaterials extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            content: ""
+            content:""
         };
     }
 
@@ -35,7 +36,9 @@ export default class LearningMaterials extends Component {
         return (
             <div style={{ width: '100%',margin:'0', display:'flex'}}>
 
-                    <h3>{this.state.content}</h3>
+                    <Card style={{margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'10', maxWidth:'20%'}}>
+                        <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)'}}>{this.state.content}</Card.Header>
+                    </Card>
             </div>
         );
     }

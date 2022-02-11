@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import React, {Component} from "react";
+import {Route, Switch} from "react-router-dom";
 
 
 import Login from "../pages/LoginPage";
@@ -16,17 +16,17 @@ class Router extends Component {
     render() {
 
         return (
-            <div style={{margin:'20px'}}>
-                    <Switch>
-                        <Route exact path={["/", "/pages/home"]} component={Home} />
-                        <Route exact path="/users/login" component={Login} />
-                        <Route exact path="/users/register" component={Register} />
-                        <Route path="/pages/materials" component={LearningMaterials} />
-                        <Route path="/pages/games" component={Games} />
-                        <Route exact path="/games/multiplicationgame" component={Multiplication} />
-                        <Route exact path="/games/additiongame" component={Addition} />
-                        <Route exact path="/games/fractiongame" component={Fractions} />
-                    </Switch>
+            <div style={{margin: '20px'}}>
+                <Switch>
+                    <Route exact path={["/", "/pages/home"]} component={Home}/>
+                    <Route exact path="/users/login" component={Login}/>
+                    <Route exact path="/users/register" component={Register}/>
+                    <Route path="/pages/materials" component={LearningMaterials}/>
+                    <Route path="/pages/games" component={Games}/>
+                    <Route exact path="/games/multiplicationgame" component={Multiplication}/>
+                    <Route exact path="/games/additiongame" component={Addition}/>
+                    <Route exact path="/games/fractiongame" component={Fractions}/>
+                </Switch>
             </div>
         );
     }

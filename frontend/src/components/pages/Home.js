@@ -3,6 +3,7 @@ import UserService from "../../service/user_service";
 import {Button, Card, Table, Toast, ToastContainer} from "react-bootstrap";
 import Popup from 'reactjs-popup';
 import user_icon from "../../assets/user_icon.png";
+import GameService from "../../service/game_service";
 
 
 export default class Home extends React.Component {
@@ -19,7 +20,8 @@ export default class Home extends React.Component {
             message: "",
             results:[],
             emailValid: false,
-            passwordValid: false
+            passwordValid: false,
+            games:[]
         };
         this.formOnChange = this.formOnChange.bind(this);
         this.handleSubmit=this.handleSubmit.bind(this);
@@ -32,6 +34,9 @@ export default class Home extends React.Component {
         if(this.state.currentUser!=null){
          UserService.getResults(this.state.currentUser.id).then((res)=>
             this.setState({results: res}));
+
+         GameService.getGames(this.state.currentUser.class).then((res)=>
+                this.setState({games: res}));
         }
     }
 
@@ -51,7 +56,7 @@ export default class Home extends React.Component {
 
     validateFields() {
         let emailValid= this.state.newEmail.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        let passwordValid = this.state.newPassword.length >= 6 && this.state.newPassword.match();
+        let passwordValid = this.state.newPassword.length >= 6 && this.state.newPassword.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])$/i);
 
 
         this.setState({
@@ -160,7 +165,7 @@ export default class Home extends React.Component {
                             <tbody>
 
                                 {this.state.results.map(res => (<tr>
-                                    <td>{res.excercise_id}</td>
+                                    <td>{this.state.games.map(i=>i.name).at(res.excercise_id-1)}</td>
                                     <td>{res.point}</td>
                                     <td>{new Date(res.time).toLocaleString()}</td>
                                 </tr>))}
