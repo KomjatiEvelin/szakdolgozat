@@ -17,10 +17,10 @@ const Fractions=()=>{
     const [finished,setFinished]=useState(false);
     const [score,setScore]=useState(0);
     const [maxScore, setMaxScore]=useState(0);
-    const [counter,setCounter]=useState(random(1,15));
-    const [divider,setDivider]=useState(random(1,15));
-    const [inputCount, setInputCount] = useState('');
-    const [inputDiv, setInputDiv] = useState('');
+    const [counter,setCounter]=useState(random(1,10));
+    const [divider,setDivider]=useState(random(1,10));
+    const [inputCount, setInputCount] = useState(0);
+    const [inputDiv, setInputDiv] = useState(0);
 
     const endGame=()=>{
         setPlaying(false)
@@ -41,8 +41,8 @@ const Fractions=()=>{
             setScore(score+1);
         }
         setMaxScore(maxScore+1);
-        setCounter(random(1,15));
-        setDivider(random(1,15));
+        setCounter(random(1,10));
+        setDivider(random(1,10));
     }
 
 
@@ -82,7 +82,7 @@ const Fractions=()=>{
 
             {finished &&
             <Card.Text>
-                <Score value={score} maxScore={maxScore}/>
+                <Score value={score} maxScore={maxScore}/>-
                 <Button variant="primary" size={"lg"} onClick={startGame}>Újra</Button>
                 <Button href="/pages/games" variant="primary" size={"lg"}>Vissza a menübe</Button>
 
