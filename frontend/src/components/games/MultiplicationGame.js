@@ -95,13 +95,13 @@ const Multiplication=()=>{
 
                 </div>
                 <Divider num={divider}/>
-                <Score value={score}/>
+                <Score value={score} maxScore={maxScore}/>
                 <Timer time={TIME_LIMIT} onEnd={endGame}/><br/>
             </Card.Text>)}
 
             {finished &&
             <Card.Text>
-                <Score value={score}/>
+                <Score value={score} maxScore={maxScore}/>
                 <Button variant="primary" size={"lg"} onClick={startGame}>Újra</Button>
                 <Button href="/pages/games" variant="primary" size={"lg"}>Vissza a menübe</Button>
             </Card.Text>}
