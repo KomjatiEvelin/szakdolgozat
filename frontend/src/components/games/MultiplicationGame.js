@@ -43,17 +43,15 @@ const Multiplication=()=>{
         setDivider(random(2,10))
     }
 
-    function checkAndDelete(id, content){
+   const checkAndDelete=(id, content)=>{
 
         const item=document.getElementById(id);
         if(content%divider===0){
 
             item.style.backgroundColor="green";
-            setTimeout(() => {setScore(score+1); setMaxScore(maxScore+1)}, 400);
         }
         else {
             item.style.backgroundColor="red";
-            setTimeout(() => {setScore(score-1);setMaxScore(maxScore+1)}, 400);
         }
         setTimeout(() => {item.style.visibility="hidden" }, 200);
 

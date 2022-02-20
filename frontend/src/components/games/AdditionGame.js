@@ -54,19 +54,19 @@ const Addition=()=>{
         }
     }
 
-    const [input, setInput] = useState('');
+    const [input, setInput] = useState(0);
     const [num1, setNum1] = useState(generateNumber);
     const [num2, setNum2] = useState(generateNumber);
 
     const checkResult=()=>{
-        if(num1+num2==input){
+        if(num1+num2===input){
 
             setScore(score+1);
         }
         setMaxScore(maxScore+1);
         setNum1(generateNumber);
         setNum2(generateNumber);
-        setInput('');
+        setInput(0);
     }
 
     const splitUpNums=(num)=>{
@@ -88,9 +88,9 @@ const Addition=()=>{
             </Card.Text>}
 
             {playing&&(<Card.Text style={{padding:'45px', margin:"10px", backgroundColor:'rgba(229,184,5,0.65)' , fontSize:'20px'}}>
-                <h1>{num1}+{num2}=<input type={"number"} value={input} onChange={e=>setInput(e.target.value)} /></h1>
+                <h1>{num1}+{num2}=<input type={"number"} value={input} onChange={e=>setInput(Number(e.target.value))} /></h1>
 
-                { (User.class==1)&&(
+                { (User.class===1)&&(
                 <><Apples num={num1}/>
                 <RedMedals num={num2}/></>)
                 }
@@ -99,8 +99,6 @@ const Addition=()=>{
                     <h2 style={{color:"darkred"}}>{splitUpNums(num1)}</h2>
                     <h2>+</h2>
                     <h2 style={{color:"blue"}}> {splitUpNums(num2)}</h2>
-                    <h2>=</h2>
-                    <input type={"number"}/> + <input type={"number"} /> + <input  type={"number"}/> +<input  type={"number"}/>
                 </>)}
 
                 <Score value={score} maxScore={maxScore}/>

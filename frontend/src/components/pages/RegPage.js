@@ -30,7 +30,7 @@ class RegPage extends React.Component {
     validateFields() {
         let emailValid= this.state.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
         let passwordValid = this.state.password.length >= 6 && this.state.password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])$/i);
-        let usernameValid = this.state.username.length >= 4 && this.state.username.match(/^\w+$/);
+        let usernameValid = this.state.userName.length >= 4;
 
 
         this.setState({

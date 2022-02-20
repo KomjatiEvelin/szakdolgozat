@@ -36,7 +36,7 @@ const Fractions=()=>{
     }
 
     const checkResult=()=>{
-        if(inputCount==counter&&inputDiv==divider){
+        if(inputCount===counter&&inputDiv===divider){
 
             setScore(score+1);
         }
@@ -71,9 +71,9 @@ const Fractions=()=>{
                 />
 
 
-                <input type={"number"} id={"count"} min={1} value={inputCount} onChange={e=>setInputCount(e.target.value)}/>
-                <hr/>
-                <input type={"number"} id={"fract"} min={1} value={inputDiv} onChange={e=>setInputDiv(e.target.value)}/>
+                <input type={"number"} style={{width:"25%"}} id={"count"} min={1} value={inputCount} onChange={e=>setInputCount(Number(e.target.value))}/>
+                <hr style={{ borderTop: "5px solid #095484;", width:"25%"}}/>
+                <input type={"number"} style={{width:"25%"}} id={"fract"} min={1} value={inputDiv} onChange={e=>setInputDiv(Number(e.target.value))}/>
                 <Button size={"lg"} variant="primary" onClick={checkResult}>Ellenőrzés</Button>
 
                 <Score value={score} maxScore={maxScore}/>
