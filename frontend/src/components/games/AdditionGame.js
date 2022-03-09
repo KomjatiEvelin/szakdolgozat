@@ -14,9 +14,9 @@ let TIME_LIMIT=60000;
 
 
 
-const Apples=({num})=> <div>{new Array(num).map((_)=> <img src={apple_icon} alt={"icon"} style={{width:"50px", margin:"10px"}}/>)}</div>
+const Apples=({num})=> <div>{new Array(num).map(()=> <img src={apple_icon} alt={"icon"} style={{width:"50px", margin:"10px"}}/>)}</div>
 
-const RedMedals=({num})=> <div>{new Array(num).map((_)=> <img src={banana_icon} alt={"icon"} style={{width:"50px", margin:"10px"}}/>)}</div>
+const Bananas=({num})=> <div>{new Array(num).map(()=> <img src={banana_icon} alt={"icon"} style={{width:"50px", margin:"10px"}}/>)}</div>
 
 
 
@@ -54,19 +54,19 @@ const Addition=()=>{
         }
     }
 
-    const [input, setInput] = useState(0);
+    const [input, setInput] = useState('');
     const [num1, setNum1] = useState(generateNumber);
     const [num2, setNum2] = useState(generateNumber);
 
     const checkResult=()=>{
-        if(num1+num2===input){
+        if(num1+num2===Number(input)){
 
             setScore(score+1);
         }
         setMaxScore(maxScore+1);
         setNum1(generateNumber);
         setNum2(generateNumber);
-        setInput(0);
+        setInput('');
     }
 
     const splitUpNums=(num)=>{
@@ -88,11 +88,12 @@ const Addition=()=>{
             </Card.Text>}
 
             {playing&&(<Card.Text style={{padding:'45px', margin:"10px", backgroundColor:'rgba(229,184,5,0.65)' , fontSize:'20px'}}>
-                <h1>{num1}+{num2}=<input type={"number"} value={input} onChange={e=>setInput(Number(e.target.value))} /></h1>
+                <h1>{num1}+{num2}=<input type={"number"} value={input} onChange={e=>setInput(e.target.value)} /></h1>
 
                 { (User.class===1)&&(
                 <><Apples num={num1}/>
-                <RedMedals num={num2}/></>)
+                <Bananas num={num2}/>
+                </>)
                 }
 
                 {(User.class>1)&&(<>
@@ -104,6 +105,7 @@ const Addition=()=>{
                 <Score value={score} maxScore={maxScore}/>
                 <Timer time={TIME_LIMIT} onEnd={endGame}/><br/>
                 <Button size={"lg"} variant="primary" onClick={checkResult}>Ellenőrzés</Button>
+                <Button variant="primary" size={"lg"} onClick={endGame}>Befejezés</Button>
             </Card.Text>)}
 
             {finished &&

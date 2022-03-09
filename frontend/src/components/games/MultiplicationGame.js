@@ -95,6 +95,7 @@ const Multiplication=()=>{
                 <Divider num={divider}/>
                 <Score value={score} maxScore={maxScore}/>
                 <Timer time={TIME_LIMIT} onEnd={endGame}/><br/>
+                <Button variant="primary" size={"lg"} onClick={endGame}>Befejezés</Button>
             </Card.Text>)}
 
             {finished &&

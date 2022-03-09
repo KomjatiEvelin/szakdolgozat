@@ -4,10 +4,13 @@ import UserService from "../../service/user_service";
 import GameService from "../../service/game_service";
 import Score from "../elements/Score";
 import { PieChart } from 'react-minimal-pie-chart';
+import Timer from "../elements/Timer";
 
 const random=(min,max)=>{
     return Math.round(Math.random() * (max-min) + min);
 }
+
+let TIME_LIMIT=60000;
 
 const User=UserService.getCurrentUser();
 
@@ -17,10 +20,11 @@ const Fractions=()=>{
     const [finished,setFinished]=useState(false);
     const [score,setScore]=useState(0);
     const [maxScore, setMaxScore]=useState(0);
-    const [counter,setCounter]=useState(random(1,10));
     const [divider,setDivider]=useState(random(1,10));
-    const [inputCount, setInputCount] = useState(0);
-    const [inputDiv, setInputDiv] = useState(0);
+
+    const [counter,setCounter]=useState(random(1,divider));
+    const [inputCount, setInputCount] = useState('');
+    const [inputDiv, setInputDiv] = useState('');
 
     const endGame=()=>{
         setPlaying(false)
@@ -35,14 +39,18 @@ const Fractions=()=>{
         setFinished(false)
     }
 
+
     const checkResult=()=>{
-        if(inputCount===counter&&inputDiv===divider){
+        if(Number(inputCount)===counter&&Number(inputDiv)===divider){
 
             setScore(score+1);
         }
         setMaxScore(maxScore+1);
-        setCounter(random(1,10));
-        setDivider(random(1,10));
+        let div=random(1,10);
+        setDivider(div);
+        setCounter(random(0,div));
+        setInputCount('');
+        setInputDiv('');
     }
 
 
@@ -69,14 +77,13 @@ const Fractions=()=>{
                           data={arr}
                           paddingAngle={"0.8"}
                 />
-
-
-                <input type={"number"} style={{width:"25%"}} id={"count"} min={1} value={inputCount} onChange={e=>setInputCount(Number(e.target.value))}/>
+                <input type={"number"} style={{width:"25%"}} id={"count"} min={0} value={inputCount} onChange={e=>setInputCount(e.target.value)}/>
                 <hr style={{ borderTop: "5px solid #095484;", width:"25%"}}/>
-                <input type={"number"} style={{width:"25%"}} id={"fract"} min={1} value={inputDiv} onChange={e=>setInputDiv(Number(e.target.value))}/>
+                <input type={"number"} style={{width:"25%"}} id={"fract"} min={1} value={inputDiv} onChange={e=>setInputDiv(e.target.value)}/>
                 <Button size={"lg"} variant="primary" onClick={checkResult}>Ellenőrzés</Button>
 
                 <Score value={score} maxScore={maxScore}/>
+                <Timer time={TIME_LIMIT} onEnd={endGame}/><br/>
                 <Button variant="primary" size={"lg"} onClick={endGame}>Befejezés</Button>
             </Card.Text>)}
 
