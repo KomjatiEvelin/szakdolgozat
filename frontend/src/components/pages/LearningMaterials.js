@@ -2,13 +2,18 @@ import React, { Component } from "react";
 
 import MaterialService from "../../service/material_service";
 import {Button, Card} from "react-bootstrap";
+import UserService from "../../service/user_service";
 
 export default class LearningMaterials extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            content:""
+            currentUser: UserService.getCurrentUser(),
+            toastShown:false,
+            toastVariant:"",
+            message: "",
+            content:[]
         };
     }
 
