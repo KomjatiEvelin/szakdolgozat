@@ -78,32 +78,33 @@ exports.signin = (req, res) => {
 
 exports.updateUser = (req, res) => {
 
-        User.update({ email: req.body.email,
-            class:req.body.classnum}, {where: {username:req.body.username}}
+    if(req.body.email.length>5){
+        User.update({ email: req.body.email}, {where: {username:req.body.username}})
+    }
+    if(req.body.passwd.length>5){
+        User.update({ passwd: req.body.passwd}, {where: {username:req.body.username}})
+    }
+    if(req.body.classnum>0){
+        User.update({ class: req.body.classnum}, {where: {username:req.body.username}})
+    }
 
-        ).then(()=>{
-            User.findOne({
-                where: {
-                    username: req.body.username
-                }}).then(function (User){
-                    res.status(200).send({
-                        id: User.id,
-                        email: User.email,
-                        class:User.class,
-                        username: User.username,
-                        accessToken:  req.headers["x-access-token"],
-                        message: "Successfully updated!"
-                    });
-                }
-            ).catch(err => {
-                    res.status(500).send({ message: err.message });
-                })
+    User.findOne({
+            where: {
+                username: req.body.username
+            }}).then(function (User){
+                res.status(200).send({
+                    id: User.id,
+                    email: User.email,
+                    class:User.class,
+                    username: User.username,
+                    accessToken:  req.headers["x-access-token"],
+                    message: "Successfully updated!"
+                });
+            }
+        ).catch(err => {
+            res.status(500).send({ message: err.message });
+        })
 
-
-        }).catch(err => {
-        res.status(500).send({ message: err.message });
-
-    });
 };
 
 exports.getUsersResults=(req,res)=>{

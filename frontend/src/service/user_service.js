@@ -36,10 +36,11 @@ class AuthService {
         return JSON.parse(localStorage.getItem('user'));
     }
 
-    modifyUserData(email,classnum,username){
+    modifyUserData(email,classnum,passwd,username){
         return axios.put(API_URL+"update",{
             email,
             classnum,
+            passwd,
             username
         },{ headers: authHeader() }).then(response => {
             if (response.status===200) {

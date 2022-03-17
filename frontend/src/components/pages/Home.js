@@ -74,7 +74,7 @@ export default class Home extends React.Component {
 
         this.validateFields();
         if(this.state.emailValid&&this.state.passwordValid){
-        UserService.modifyUserData(this.state.newEmail, this.state.newClassNum,this.state.currentUser.username).then(
+        UserService.modifyUserData(this.state.newEmail, this.state.newClassNum,this.state.newPassword,this.state.currentUser.username).then(
            ()=> {
                const resMessage="Successfully modified!";
                 this.setState({currentUser:UserService.getCurrentUser(),
