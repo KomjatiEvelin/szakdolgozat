@@ -79,31 +79,30 @@ exports.signin = (req, res) => {
 exports.updateUser = (req, res) => {
 
     if(req.body.email.length>5){
-        User.update({ email: req.body.email}, {where: {username:req.body.username}})
+        User.update({ email: req.body.email}, {where: {username:req.body.username}}).then(() => {
+            handleUpdate(req, res)
+        }).catch(err => {
+            res.status(500).send({message: err.message})
+        });
     }
-    if(req.body.passwd.length>5){
-        User.update({ passwd: req.body.passwd}, {where: {username:req.body.username}})
-    }
-    if(req.body.classnum>0){
-        User.update({ class: req.body.classnum}, {where: {username:req.body.username}})
-    }
-
-    User.findOne({
+    if(req.body.passwd.length>5) {
+        User.findOne({
             where: {
                 username: req.body.username
             }}).then(function (User){
-                res.status(200).send({
-                    id: User.id,
-                    email: User.email,
-                    class:User.class,
-                    username: User.username,
-                    accessToken:  req.headers["x-access-token"],
-                    message: "Successfully updated!"
-                });
-            }
-        ).catch(err => {
+                Password.update({passwd: bcrypt.hashSync(req.body.passwd,2)}, {where: {user_id: User.id}}).then(() =>
+                {handleUpdate(req, res)}).catch(err => {res.status(500).send({message: err.message})});
+                }).catch(err => {
             res.status(500).send({ message: err.message });
         })
+    }
+    if(req.body.classnum>0){
+        User.update({ class: req.body.classnum}, {where: {username:req.body.username}}).then(() => {
+            handleUpdate(req, res)
+        }).catch(err => {
+            res.status(500).send({message: err.message})
+        });
+    }
 
 };
 
@@ -117,5 +116,26 @@ exports.getUsersResults=(req,res)=>{
         .catch(err => {
         res.status(500).send({message: err.message});
         });
+
+}
+
+
+function handleUpdate(req,res){
+    User.findOne({
+        where: {
+            username: req.body.username
+        }}).then(function (User){
+            res.status(200).send({
+                id: User.id,
+                email: User.email,
+                class:User.class,
+                username: User.username,
+                accessToken:  req.headers["x-access-token"],
+                message: "Successfully updated!"
+            });
+        }
+    ).catch(err => {
+        res.status(500).send({ message: err.message });
+    })
 
 }

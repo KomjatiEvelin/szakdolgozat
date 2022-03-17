@@ -11,51 +11,51 @@ export default class Home extends React.Component {
         super(props);
         this.state = {
             currentUser: UserService.getCurrentUser(),
-            newEmail:"",
+            newEmail: "",
             newClassNum: "",
-            newPassword:"",
-            loading:false,
-            toastShown:false,
-            toastVariant:"",
+            newPassword: "",
+            loading: false,
+            toastShown: false,
+            toastVariant: "",
             message: "",
-            results:[],
+            results: [],
             emailValid: false,
             passwordValid: false,
-            games:[]
+            games: []
         };
         this.formOnChange = this.formOnChange.bind(this);
-        this.handleSubmit=this.handleSubmit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.logOut = this.logOut.bind(this);
-        this.closeToast=this.closeToast.bind(this);
+        this.closeToast = this.closeToast.bind(this);
     }
 
 
     componentDidMount() {
-        if(this.state.currentUser!=null){
-         UserService.getResults(this.state.currentUser.id).then((res)=>
-            this.setState({results: res}));
+        if (this.state.currentUser != null) {
+            UserService.getResults(this.state.currentUser.id).then((res) =>
+                this.setState({results: res}));
 
-         GameService.getGames(this.state.currentUser.class).then((res)=>
+            GameService.getGames(this.state.currentUser.class).then((res) =>
                 this.setState({games: res}));
         }
     }
 
-    closeToast(){
+    closeToast() {
 
-        this.setState({toastShown:false})
+        this.setState({toastShown: false})
     }
 
     logOut() {
         UserService.logout();
     }
 
-    formOnChange(event){
-        const {name,value} = event.target;
-        this.setState({[name] : value});
+    formOnChange(event) {
+        const {name, value} = event.target;
+        this.setState({[name]: value});
     }
 
     validateFields() {
-        let emailValid= this.state.newEmail.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        let emailValid = this.state.newEmail.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
         let passwordValid = this.state.newPassword.length >= 6 && this.state.newPassword.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])$/i);
 
 
@@ -72,15 +72,16 @@ export default class Home extends React.Component {
             loading: true
         });
 
-        this.validateFields();
-        if(this.state.emailValid&&this.state.passwordValid){
-        UserService.modifyUserData(this.state.newEmail, this.state.newClassNum,this.state.newPassword,this.state.currentUser.username).then(
-           ()=> {
-               const resMessage="Successfully modified!";
-                this.setState({currentUser:UserService.getCurrentUser(),
-                    toastShown:true,
-                    toastVariant:"success",
-                    message:resMessage});
+
+        UserService.modifyUserData(this.state.newEmail, this.state.newClassNum, this.state.newPassword, this.state.currentUser.username).then(
+            () => {
+                const resMessage = "Successfully modified!";
+                this.setState({
+                    currentUser: UserService.getCurrentUser(),
+                    toastShown: true,
+                    toastVariant: "success",
+                    message: resMessage
+                });
             },
             error => {
                 const resMessage =
@@ -93,19 +94,12 @@ export default class Home extends React.Component {
                 this.setState({
                     loading: false,
                     message: resMessage,
-                    toastShown:true,
-                    toastVariant:"danger",
+                    toastShown: true,
+                    toastVariant: "danger",
                 });
-            } );
-        }
-        else{
-                this.setState({
-                    successful: false,
-                    message: "Nem megfelelő formátum",
-                    toastShown:true,
-                    toastVariant:"danger"
-                });
-            }
+            });
+
+
 
     }
 
