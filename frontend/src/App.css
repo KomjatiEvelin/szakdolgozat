@@ -71,4 +71,8 @@ body{
   }
 }
 
-
+@media (max-width:800px) {
+  .maincard {
+    width: 75vw!important;
+  }
+}

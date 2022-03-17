@@ -63,7 +63,7 @@ const Fractions=()=>{
     }
 
     return(
-        <Card style={{padding:'5px', margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'20px',  textAlign:'center'}}>
+        <Card className={"maincard"}  style={{padding:'5px', margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'20px',  textAlign:'center'}}>
             {!playing &&!finished &&
             <Card.Text>
                 <h1>Törtek gyakorlása</h1>

@@ -112,7 +112,7 @@ export default class Home extends React.Component {
         }
         return (
             <div style={{ width: '100%',margin:'0', display:'flex'}}>
-                <Card style={{ width: '25rem',margin:"10px", backgroundColor:'rgba(171, 151, 0, 0.65)' , fontSize:'10'}}>
+                <Card style={{ width: '25vw',margin:"10px", backgroundColor:'rgba(171, 151, 0, 0.65)' , fontSize:'10'}}>
                     <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)', textAlign:"center"}}>
                         Profil adatok
                             <img src={user_icon} alt={"icon"} style={{width:"50%", margin:"10px"}}/>

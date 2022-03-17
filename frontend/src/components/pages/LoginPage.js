@@ -65,7 +65,7 @@ class LoginPage extends React.Component {
 
         return (
         <>
-            <Card style={{ width: '25rem', margin:"auto",marginTop:"10rem", backgroundColor:'rgba(171, 151, 0, 0.65)'}}>
+            <Card className={"maincard"} style={{ width: '30vw', margin:"auto", marginTop:"10%", backgroundColor:'rgba(171, 151, 0, 0.65)'}}>
                 <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)'}}>Bejelentkezés</Card.Header>
                 <Card.Body>
                     <Card.Text>

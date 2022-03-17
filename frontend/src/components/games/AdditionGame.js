@@ -78,7 +78,7 @@ const Addition=()=>{
         }
     }
     return(
-        <Card style={{padding:'15px', margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'20px',  textAlign:'center'}}>
+        <Card className={"maincard"}  style={{padding:'15px', margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'20px',  textAlign:'center'}}>
             {!playing &&!finished && <Card.Text>
                 <h1>Összeadás gyakorlása</h1>
                 <h3>Gyakorold az összeadást, és oldj meg minnél több feladványt {TIME_LIMIT/60000} perc alatt</h3>

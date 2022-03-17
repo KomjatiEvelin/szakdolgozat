@@ -79,7 +79,7 @@ const Multiplication=()=>{
 
 
     return(
-        <Card style={{padding:'5px', margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'20px',  textAlign:'center'}}>
+        <Card className={"maincard"}  style={{padding:'5px', margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'20px',  textAlign:'center'}}>
             {!playing &&!finished && <Card.Text>
                 <h1>Osztás gyakorlása</h1>
                 <h3>Gyakorold az osztást, szerezz minél több pontot 1 perc alatt</h3>

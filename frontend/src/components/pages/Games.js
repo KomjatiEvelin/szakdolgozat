@@ -29,7 +29,7 @@ export default class Games extends Component {
         return (
             <div style={{ width: '100%',margin:'0', display:'flex'}}>
                 {this.state.content.map(cont => (
-                   <Card style={{margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'10', maxWidth:'20%'}}>
+                   <Card className={"maincard"} style={{margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'10', width:'20vw'}}>
                     <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)'}}>{cont.name}</Card.Header>
                     <Card.Img variant="top" src={require(`../../assets/${cont.theme}`).default} alt={"logo"}/>
                     <Card.Body>
