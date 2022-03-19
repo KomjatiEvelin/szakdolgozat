@@ -9,7 +9,10 @@ html {
 }
 
 body{
-  background: none;
+  width: 100vw;
+  background-image: url("./assets/reg_backgr.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   color:white;
 }
 
@@ -71,8 +74,25 @@ body{
   }
 }
 
-@media (max-width:800px) {
+@media (max-width:600px) {
   .maincard {
     width: 75vw!important;
   }
+
+  .maincontainer {
+    flex-direction: column!important;
+  }
+
+  .usercard {
+    width: 80vw!important;
+  }
+
+  .scorecard {
+    width: 80vw!important;
+  }
+
+  .gamecard {
+    width: 70vw!important;
+  }
 }
+

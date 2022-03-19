@@ -111,8 +111,8 @@ export default class Home extends React.Component {
             window.location.reload();
         }
         return (
-            <div style={{ width: '100%',margin:'0', display:'flex'}}>
-                <Card style={{ width: '25vw',margin:"10px", backgroundColor:'rgba(171, 151, 0, 0.65)' , fontSize:'10'}}>
+            <div className={"maincontainer"} style={{ width: '100%',margin:'0', display:'flex'}}>
+                <Card className={"usercard"} style={{ width: '30%',margin:"10px", backgroundColor:'rgba(171, 151, 0, 0.65)' , fontSize:'10px'}}>
                     <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)', textAlign:"center"}}>
                         Profil adatok
                             <img src={user_icon} alt={"icon"} style={{width:"50%", margin:"10px"}}/>
@@ -145,7 +145,7 @@ export default class Home extends React.Component {
                         <Button href="/users/login" onClick={this.logOut} style={{margin:'5px'}} variant="danger">Kijelentkezés</Button>
                     </Card.Body>
                 </Card>
-                <Card style={{ width: '100%',margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'10'}}>
+                <Card className={"scorecard"} style={{ width: '100%',margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'10'}}>
                     <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)'}}>Korábbi eredmények</Card.Header>
                     <Card.Body>
                         <Table striped bordered hover variant={"dark"}>

@@ -39,7 +39,7 @@ export default class LearningMaterials extends Component {
 
     render() {
         return (
-            <div style={{ width: '100%',margin:'0', display:'flex'}}>
+            <div className={"maincontainer"} style={{ width: '100%',margin:'0', display:'flex'}}>
 
                     <Card className={"maincard"} style={{margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'10', width:'vw'}}>
                         <Card.Header as="h2" style={{backgroundColor:'rgba(60, 93, 93, 0.8)'}}>{this.state.content}</Card.Header>
