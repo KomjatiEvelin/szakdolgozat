@@ -5,6 +5,8 @@ import GameService from "../../service/game_service";
 import Score from "../elements/Score";
 import Timer from "../elements/Timer";
 
+let SCORE=0;
+let fullScore=0;
 const random=(min,max)=>{
     return Math.round(Math.random() * (max-min) + min);
 }
@@ -32,7 +34,7 @@ const Multiplication=()=>{
     const endGame=()=>{
         setPlaying(false)
         setFinished(true)
-        GameService.saveScore(User.id,2,score,maxScore).then(()=>"Success!")
+        GameService.saveScore(User.id,2,SCORE,fullScore).then(()=>"Success!")
     }
 
     const startGame=()=>{
@@ -49,10 +51,13 @@ const Multiplication=()=>{
         if(content%divider===0){
 
             item.style.backgroundColor="green";
+            SCORE++;
         }
         else {
             item.style.backgroundColor="red";
+            SCORE--;
         }
+        fullScore++;
         setTimeout(() => {item.style.visibility="hidden" }, 200);
 
 
@@ -82,7 +87,7 @@ const Multiplication=()=>{
         <Card className={"maincard"}  style={{padding:'5px', margin:"10px", backgroundColor:'rgba(0, 11, 171, 0.65)' , fontSize:'20px',  textAlign:'center'}}>
             {!playing &&!finished && <Card.Text>
                 <h1>Osztás gyakorlása</h1>
-                <h3>Gyakorold az osztást, szerezz minél több pontot 1 perc alatt</h3>
+                <h3>Gyakorold az osztást/szorzást, szerezz minél több pontot 1 perc alatt</h3>
                 <h3>Válaszd ki a lehulló dobozok közül azt, amelyik osztható az alul látható számmal!</h3>
                 <Button size={"lg"} variant="primary" onClick={startGame}>Játék indítása</Button>
             </Card.Text>}
@@ -93,14 +98,13 @@ const Multiplication=()=>{
 
                 </div>
                 <Divider num={divider}/>
-                <Score value={score} maxScore={maxScore}/>
                 <Timer time={TIME_LIMIT} onEnd={endGame}/><br/>
                 <Button variant="primary" size={"lg"} onClick={endGame}>Befejezés</Button>
             </Card.Text>)}
 
             {finished &&
             <Card.Text>
-                <Score value={score} maxScore={maxScore}/>
+                <Score value={SCORE} maxScore={fullScore}/>
                 <Button variant="primary" size={"lg"} onClick={startGame}>Újra</Button>
                 <Button href="/pages/games" variant="primary" size={"lg"}>Vissza a menübe</Button>
             </Card.Text>}
