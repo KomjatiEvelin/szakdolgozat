@@ -3,11 +3,11 @@ import authHeader from './auth_header';
 
 const API_URL = 'http://localhost:9000/pages/';
 
-class UserService {
+class MaterialService {
 
     getLearningMaterials() {
-        return axios.get(API_URL + 'materials', { headers: authHeader() });
+        return axios.get(API_URL + 'materials', { headers: authHeader() }).then((response)=>response.data);;
     }
 }
 
-export default new UserService();
+export default new MaterialService();

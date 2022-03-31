@@ -19,7 +19,7 @@ const Divider=({num})=>{
 }
 
 
-const TIME_LIMIT=60000;
+const TIME_LIMIT=120000;
 
 
 const Multiplication=()=>{
@@ -27,8 +27,6 @@ const Multiplication=()=>{
 
     const [playing, setPlaying]=useState(false);
     const [finished,setFinished]=useState(false);
-    const [score,setScore]=useState(0);
-    const [maxScore, setMaxScore]=useState(0);
     const [divider,setDivider]=useState(random(2,10));
 
     const endGame=()=>{
@@ -38,8 +36,6 @@ const Multiplication=()=>{
     }
 
     const startGame=()=>{
-        setScore(0);
-        setMaxScore(0)
         setPlaying(true)
         setFinished(false)
         setDivider(random(2,10))
@@ -59,6 +55,7 @@ const Multiplication=()=>{
         }
         fullScore++;
         setTimeout(() => {item.style.visibility="hidden" }, 200);
+
 
 
     }
@@ -95,7 +92,6 @@ const Multiplication=()=>{
             {playing&& (<Card.Text>
                 <div className='board'>
                     { falling()}
-
                 </div>
                 <Divider num={divider}/>
                 <Timer time={TIME_LIMIT} onEnd={endGame}/><br/>

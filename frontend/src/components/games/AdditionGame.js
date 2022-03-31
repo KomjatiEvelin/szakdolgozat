@@ -75,6 +75,7 @@ const Addition=()=>{
             case 2: return numstr[0]+'0+'+numstr[1];
             case 3: return numstr[0]+'00+'+numstr[1]+'0+'+numstr[2];
             case 4: return numstr[0]+'000+'+numstr[1]+'00+'+numstr[2]+'0+'+numstr[3];
+            default: return  numstr;
         }
     }
     return(
@@ -89,7 +90,7 @@ const Addition=()=>{
             {playing&&(<Card.Text style={{padding:'45px', margin:"10px", backgroundColor:'rgba(229,184,5,0.65)' , fontSize:'20px'}}>
                 <h1>{num1}+{num2}=<input type={"number"} value={input} onChange={e=>setInput(e.target.value)} /></h1>
 
-                { (User.class==1)?(
+                { (Number(User.class)===1)?(
                 <><Apples num={num1}/>
                 <Bananas num={num2}/>
                 </>) : (<>
