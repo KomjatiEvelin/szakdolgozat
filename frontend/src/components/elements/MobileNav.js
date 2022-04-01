@@ -43,15 +43,10 @@ class MobileNav extends Component {
                     </Nav>
 
                 ) : (
-                    <div style={{ width: '100%', display:'flex'}}>
                         <Nav className="me-auto mx-4 " style={{ maxHeight: '100px',margin:'5px'}}>
                             <Nav.Link href="/users/login">Bejelentkezés</Nav.Link>
-                        </Nav>
-                        <Nav className="my-auto mx-4 justify-content-end" style={{ maxHeight: '100px' }}>
-
                             <Nav.Link href="/users/register">Regisztráció</Nav.Link>
                         </Nav>
-                    </div>
                 )}
             </Menu>
             </Navbar>

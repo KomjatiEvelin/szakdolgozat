@@ -88,7 +88,8 @@ const Addition=()=>{
             </Card.Text>}
 
             {playing&&(<Card.Text style={{padding:'45px', margin:"10px", backgroundColor:'rgba(229,184,5,0.65)' , fontSize:'20px'}}>
-                <h1>{num1}+{num2}=<input type={"number"} value={input} onChange={e=>setInput(e.target.value)} /></h1>
+                <h1>{num1}+{num2}=</h1>
+                <input type={"number"} value={input} onChange={e=>setInput(e.target.value)} style={{width:"25%!important", margin:"auto!important"}} />
 
                 { (Number(User.class)===1)?(
                 <><Apples num={num1}/>

@@ -77,9 +77,11 @@ const Fractions=()=>{
                           data={arr}
                           paddingAngle={"0.8"}
                 />
-                <input type={"number"} style={{width:"25%"}} id={"count"} min={0} value={inputCount} onChange={e=>setInputCount(e.target.value)}/>
-                <hr style={{ borderTop: "5px solid #095484;", width:"25%"}}/>
-                <input type={"number"} style={{width:"25%"}} id={"fract"} min={1} value={inputDiv} onChange={e=>setInputDiv(e.target.value)}/>
+
+                <input type={"number"} style={{width:"15%!important"}} id={"count"} min={0} value={inputCount} onChange={e=>setInputCount(e.target.value)}/>
+                <hr style={{border: "5px solid black", width:"200px", margin:"auto",marginTop:"5px", marginBottom:"5px"}}/>
+                <input type={"number"} style={{width:"15%!important"}} id={"fract"} min={1} value={inputDiv} onChange={e=>setInputDiv(e.target.value)}/>
+                <br/>
                 <Button size={"lg"} variant="primary" onClick={checkResult}>Ellenőrzés</Button>
 
                 <Score value={score} maxScore={maxScore}/>
