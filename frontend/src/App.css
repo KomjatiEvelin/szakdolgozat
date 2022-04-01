@@ -9,6 +9,7 @@ html {
 }
 
 body{
+  padding: 10px;
   width: 100vw;
   background-image: url("./assets/reg_backgr.jpg");
   background-repeat: no-repeat;
@@ -74,7 +75,65 @@ body{
   }
 }
 
+.MobileNav{
+  display: none;
+}
+
 @media (max-width:600px) {
+  .NavBar{
+    display: none;
+  }
+  .MobileNav{
+    display: block;
+  }
+  .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    right: 25px;
+    top: 15px;
+  }
+
+  .bm-burger-bars {
+    background: #d29e01;
+  }
+
+  .bm-burger-bars-hover {
+    background: #0222a4;
+  }
+
+  .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+
+  .bm-cross {
+    background: #bdc3c7;
+  }
+
+  .bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+  }
+
+  /* General sidebar styles */
+  .bm-menu {
+    background: #373a47;
+    padding: 2.5em 1.5em 0;
+    font-size: 1.6em;
+  }
+
+
+  /* Individual item */
+  .bm-item {
+    display: inline-block;
+  }
+
+  /* Styling of overlay */
+  .bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
   .maincard {
     width: 75vw!important;
   }

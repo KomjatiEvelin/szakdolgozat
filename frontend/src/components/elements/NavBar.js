@@ -26,21 +26,19 @@ class NavBar extends Component {
         }
     }
 
-
     render() {
         const { currentUser } = this.state;
 
         return (
-                <Navbar className="navbar navbar-expand navbar-dark bg-dark" style={{fontSize:'24px'}}>
+                <Navbar className="navbar navbar-expand navbar-dark bg-dark NavBar" style={{fontSize:'24px'}}>
 
                     {currentUser ? (
                         <div style={{ width: '100%', display:'flex'}}>
-                            <Nav className="me-auto mx-4 " style={{ maxHeight: '100px' ,margin:'5px'}}>
+                            <Nav className="me-auto mx-4" style={{ maxHeight: '100px' ,margin:'5px'}}>
                                 <Nav.Link href="/pages/materials">Tananyagok</Nav.Link>
                                 <Nav.Link href="/pages/games">Feladatok</Nav.Link>
                             </Nav>
-                            <Nav className="my-auto mx-4 justify-content-end ">
-
+                            <Nav className="my-auto mx-4 justify-content-end">
                                     <Nav.Link href={"/"} className="nav-link">
                                         <img src={user_icon} alt={"icon"} style={{height:'30px', marginRight:'5px'}}/>{currentUser.username}
                                     </Nav.Link>
@@ -48,7 +46,7 @@ class NavBar extends Component {
                         </div>
                     ) : (
                         <div style={{ width: '100%', display:'flex'}}>
-                            <Nav className="me-auto mx-4" style={{ maxHeight: '100px',margin:'5px'}}>
+                            <Nav className="me-auto mx-4 " style={{ maxHeight: '100px',margin:'5px'}}>
                                 <Nav.Link href="/users/login">Bejelentkezés</Nav.Link>
                             </Nav>
                             <Nav className="my-auto mx-4 justify-content-end" style={{ maxHeight: '100px' }}>

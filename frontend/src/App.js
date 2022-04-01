@@ -4,6 +4,7 @@ import "./App.css";
 
 import NavBar from "./components/elements/NavBar";
 import Router from "./components/elements/Router";
+import MobileNav from "./components/elements/MobileNav";
 
 class App extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class App extends Component {
 
         return (
             <>
+               <MobileNav/>
                <NavBar/>
                <Router/>
             </>
